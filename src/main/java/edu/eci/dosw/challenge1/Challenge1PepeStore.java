@@ -10,8 +10,12 @@ import java.util.*;
  * @author David Felipe Ortiz Salcedo
  */
 
-public class Challenge1PepeStore {
+public final class Challenge1PepeStore {
+    private Challenge1PepeStore() {
+    }
+
     public static void run() {
+        System.out.println("Running Challenge 1 - Don Pepe's Store...");
         System.out.println("Welcome to Pepe's Store :D\n" +
                 "Which type of client are you?\n" +
                 "1) New Client\n" +
@@ -60,14 +64,13 @@ public class Challenge1PepeStore {
 
         ReceiptOperations receiptOp = new ReceiptOperations(discount);
         int totalPrice = receiptOp.calculateTotalPrice(selectedProducts);
-
         int applyDiscount = receiptOp.calculateClientDiscount(selectedProducts);
         int finalPayingAmount = receiptOp.calculateFinalAmount(totalPrice, applyDiscount);
 
         Receipt clientReceipt = new Receipt(selectedProducts, totalPrice, finalPayingAmount);
 
         System.out.println("Your receipt!!");
-        selectedProducts.stream().forEach(product ->
+        clientReceipt.getProductsList().stream().forEach(product ->
                 System.out.println(product.getProductName() + ": " + product.getPrice()));
         System.out.println("\nTotal price: " + clientReceipt.getTotalPrice()
         + "\n" + "Discount: " + applyDiscount +
