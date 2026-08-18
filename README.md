@@ -52,16 +52,35 @@ Por otro lado, la inumutabilidad también se usaron en estos atributos para que 
 
 ### Evidencia
 
+#### Evidencia en código
+![Challenge evidence](diagrams/challenge2_the_five_star_chef.png)
+
+#### Diagrama UML
+![Challenge evidence](diagrams/challenge2_UML.png)
+
 ### Descripción
+
+Para realizar este ejercicio, principalmente se usaron los patrón de diseño `Builder` y `Decorator`. El patrón `Builder` se usó con el fin de que a medida que se vaya construyendo la hamburguesa, se hiciera de acuerdo a lo que quisiera el usuario: si era con pan, con carne, con salsas, otros ingredientes y demás. 
+
+Seguidamente, se usó el patrón Decorator para que cuando se obtuviera una hamburguesa base (hamburguesa con los ingredientes básicos, sin extras) entonces la clase `HamburgerBaseComponent` permitiera que la hamburguesa construida con `HamburgerBuilder` se pudiera relacionar con los componentes, la clase `HamburgerDecorator` "envolviera" la hamburguesa *original construida* en una *nueva* hamburguesa que pudiera entenderse con los componentes y finalmente añadir los ingredientes extra junto a los ingredientes que ya tenía anteriormente.
+
+Finalmente, para el calculo de los precios, se usaron streams con los métodos `mapToInt()`, `filter` y `sum()` para pasar la secuencia de elementos a enteros y sumarlos respectivamente; así mismo, para filtrar los elementos a que solo sean positivos.
 
 ### Patrones de Diseño usados
 
 | Item | Explicación
 | :---: | :---: |
-| Categoría del Patrón de Diseño | Explicación... |
-| Patrón usado | Explicación... |
-| Justificación | Explicación... |
-| Cómo fue aplicado | Explicación... |
+| Categoría del Patrón de Diseño | Creacional |
+| Patrón usado | Builder |
+| Justificación | Construir la hamburguesa según como el usuario quiera utilizando el mismo método |
+| Cómo fue aplicado | Se crearon métodos with'X' donde X eran los distintos ingredientes básicos que tendría la hamburguesa, llamando a los getters de la clase Ingredient y finalmente un método build para instanciar un objeto Hamburger junto a su precio|
+
+| Item | Explicación
+| :---: | :---: |
+| Categoría del Patrón de Diseño | Estructural |
+| Patrón usado | Decorator |
+| Justificación | Mantener el estado de la hamburguesa original con "una nueva" hamburguesa que se obtuviera a partir de los nuevos ingredientes que se añadieran |
+| Cómo fue aplicado | Se usó una interfaz para que todos los componentes utilizaran el mismo contrato y que cada uno sobreescribiera la forma en que lo iba utilizar (hacer que la misma hamburguesa se pudiera comunicar con los componentes y poder envolverla). Para finalmente, una clase hija pudiera heredar los métodos de su clase padre y añadir los ingredientes adicionales |
 
 ## Reto 3 - The Kingdom of Vehicles
 
