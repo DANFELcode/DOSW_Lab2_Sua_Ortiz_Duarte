@@ -12,6 +12,6 @@ import java.util.*;
 
 public class CalculatePrice {
     public static int calculateTotalPrice(List<Ingredient> ingredients) {
-        return ingredients.stream().mapToInt(Ingredient::getPricePerIngredient).sum();
+        return ingredients.stream().mapToInt(Ingredient::getPricePerIngredient).filter(price -> price >= 0).sum();
     }
 }

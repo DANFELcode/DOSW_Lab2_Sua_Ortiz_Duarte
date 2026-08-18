@@ -64,7 +64,7 @@ Para realizar este ejercicio, principalmente se usaron los patrón de diseño `B
 
 Seguidamente, se usó el patrón Decorator para que cuando se obtuviera una hamburguesa base (hamburguesa con los ingredientes básicos, sin extras) entonces la clase `HamburgerBaseComponent` permitiera que la hamburguesa construida con `HamburgerBuilder` se pudiera relacionar con los componentes, la clase `HamburgerDecorator` "envolviera" la hamburguesa *original construida* en una *nueva* hamburguesa que pudiera entenderse con los componentes y finalmente añadir los ingredientes extra junto a los ingredientes que ya tenía anteriormente.
 
-Finalmente, para el calculo de los precios, se usaron streams con los métodos `mapToInt()` y `sum()` para pasar la secuencia de elementos a enteros y sumarlos respectivamente.
+Finalmente, para el calculo de los precios, se usaron streams con los métodos `mapToInt()`, `filter` y `sum()` para pasar la secuencia de elementos a enteros y sumarlos respectivamente; así mismo, para filtrar los elementos a que solo sean positivos.
 
 ### Patrones de Diseño usados
 
