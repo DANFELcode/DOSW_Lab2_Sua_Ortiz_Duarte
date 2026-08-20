@@ -10,7 +10,7 @@
 ## Reto 1 - Don Pepe's Store
 
 ### Evidencia
-![Challenge evidence](diagrams/challenge1_don_pepes_store.png)
+![Challenge evidence](images/challenge1_don_pepes_store.png)
 
 ### Descripción
 
@@ -53,7 +53,7 @@ Por otro lado, la inumutabilidad también se usaron en estos atributos para que 
 ### Evidencia
 
 #### Evidencia en código
-![Challenge evidence](diagrams/challenge2_the_five_star_chef.png)
+![Challenge evidence](images/challenge2_the_five_star_chef.png)
 
 #### Diagrama UML
 ![Challenge evidence](diagrams/challenge2_UML.png)
@@ -130,36 +130,49 @@ Finalmente, para el calculo de los precios, se usaron streams con los métodos `
 ## Reto 6 - Talk to Technical Support
 
 ### Evidencia
+![Challenge evidence](images/challenge6_technical_support.png)
 
 ### Descripción
+
+Para este reto se uso el patrón de diseño Chain of Responsibility, ya que el enunciado pedia literalmente que un ticket pasara de tecnico en tecnico hasta encontrar uno capaz de resolverlo. Se crearon las clases Ticket y TicketResolution (el resultado del procesamiento, con el tecnico que lo resolvio y la lista de técnicos que lo intentaron).
+
+La interfaz SupportHandler define el contrato de la cadena handle(Ticket), y la clase Technician la implementa: cada técnico tiene una especialidad (que debe coincidir exactamente con el nivel del ticket) y una prioridad maxima que puede atender (que funciona como un umbral, es decir, atiende su nivel y los inferiores). Si un técnico no puede resolver el ticket, lo delega al siguiente next usando la misma interfaz, sin conocer los detalles de los demas tecnicos.
+
+Ya por último, SupportChain arma la cadena y procesa la lista de tickets, y SupportStatistics usa streams para calcular cuantos tickets resolvio cada tecnico, cuantos quedaron pendientes y la prioridad media de los tickets resueltos.
 
 ### Patrones de Diseño usados
 
 | Item | Explicación
 | :---: | :---: |
-| Categoría del Patrón de Diseño | Explicación... |
-| Patrón usado | Explicación... |
-| Justificación | Explicación... |
-| Cómo fue aplicado | Explicación... |
+| Categoria del Patron de Diseño | De comportamiento |
+| Patron usado | Chain of Responsibility |
+| Justificación | El enunciado pedia que un ticket se pasara de técnico en técnico hasta que alguno pudiera resolverlo, sin que el sistema supiera de antemano cual técnico especifico lo atenderia |
+| Cómo fue aplicado | Se creó la interfaz SupportHandler como contrato de la cadena, y la clase Technician la implementa: si no puede resolver el ticket (por especialidad o prioridad), delega al siguiente técnico usando la misma interfaz |
 
 ## Reto 7 - The Magic Remote Control
 
 ### Evidencia
+![Challenge evidence](images/challenge7_remote_control.png)
 
 ### Descripción
+
+Para este reto se uso el patron de diseño Command, ya que el enunciado pedia que cada accion sobre un dispositivo pudiera tener parametros y pudiera deshacerse despues de ejecutada, lo cual es la definicion del patron. Se creo la interfaz Command y varios comandos como: TurnOnCommand y TurnOffCommand (estas se reutilizaron para luces, TV y aire acondicionado con la interfaz Switchable), OpenDoorCommand, CloseDoorCommand y unos comandos con parametros como SetVolumeCommand y SetBlindPositionCommand. Cada comando guarda su estado anterior antes de ejecutarse para revertirlo exactamente al deshacerlo.
+
+La clase RemoteControl es el que ejecuta cada comando y lo registra en un historial ExecutedAction junto al usuario que lo hizo. En la parte final, RemoteControlAudit usa streams para responder las preguntas de auditoria del enunciado: que acciones se deshicieron y que usuario fue el último en modificar cada dispositivo
 
 ### Patrones de Diseño usados
 
 | Item | Explicación
 | :---: | :---: |
-| Categoría del Patrón de Diseño | Explicación... |
-| Patrón usado | Explicación... |
-| Justificación | Explicación... |
-| Cómo fue aplicado | Explicación... |
+| Categoria del Patron de Diseño | De comportamiento |
+| Patron usado | Command |
+| Justificación | El enunciado pedia que cada accion tuviera parámetros y pudiera deshacerse después de ejecutarse, que es la definición central del patrón Command |
+| Como fue aplicado | Se creo la interfaz Command con los metodos execute() y undo(), implementada por cada comando, el invocador RemoteControl ejecuta cualquier Command sin conocerlo en detalle, y cada comando guarda el estado anterior del dispositivo para poder revertirlo |
 
 ## Reto 8 - The UML Zoo
 
 ### Evidencia
+![Challenge evidence](diagrams/Challenge8_UML.png)
 
 ### Descripción
 
