@@ -48,6 +48,13 @@ La encapsulación se utilizó en las clases Product y Receipt. Principalmente pa
 
 Por otro lado, la inumutabilidad también se usaron en estos atributos para que no se pudiera modificar el precio total ni la cantidad final a pagar por el cliente.
 
+### Tests
+
+Tests ejecutados: 6
+Fallos: 0
+Errores: 0
+Saltados: 0
+
 ## Reto 2 - The Five-Star Chef
 
 ### Evidencia
@@ -81,6 +88,13 @@ Finalmente, para el calculo de los precios, se usaron streams con los métodos `
 | Patrón usado | Decorator |
 | Justificación | Mantener el estado de la hamburguesa original con "una nueva" hamburguesa que se obtuviera a partir de los nuevos ingredientes que se añadieran |
 | Cómo fue aplicado | Se usó una interfaz para que todos los componentes utilizaran el mismo contrato y que cada uno sobreescribiera la forma en que lo iba utilizar (hacer que la misma hamburguesa se pudiera comunicar con los componentes y poder envolverla). Para finalmente, una clase hija pudiera heredar los métodos de su clase padre y añadir los ingredientes adicionales |
+
+### Tests
+
+Tests ejecutados: 5
+Fallos: 0
+Errores: 0
+Saltados: 0
 
 ## Reto 3 - The Kingdom of Vehicles
 
@@ -200,29 +214,66 @@ La clase RemoteControl es el que ejecuta cada comando y lo registra en un histor
 ### Evidencia
 ![Challenge evidence](diagrams/Challenge8_UML.png)
 
-### Descripción
-
 ## Clases Principales y sus Responsabilidades
 
 | Clase o Interfaz | Responsabilidad
 | :---: | :---: |
-| Clase... | Explicación... |
+| Animal | Es una clase padre que se encarga de representar las características de un animal en general |
+| Mammals | Es la clase hija que representa al grupo de animales pertenecientes a los mamíferos |
+| Reptiles | Es la clase hija que representa al grupo de animales pertenecientes a los reptiles |
+| Birds | Es la clase hija que representa al grupo de animales pertenecientes a las aves |
+| MedicalHistory | Tiene como responsabilidad mostrar la historia médica de cada animal como su enfermedad o el tratamiento a dar |
+| HealthStatus | Es una enumeración que determina las distintas constantes que puede tomar el estado de salud de un animal |
+| Caretaker | Representa las características del cuidador de un animal en el zoológico donde lo puede bañar, alimentar o limpiar |
+| Visitor | Es el visitante donde su responsabilidad es dar propina al cuidador o tomar una foto de un animal |
+| AnimalEventManager | Esta clase se encarga de notificar los estados en el que esté el animal |
+| AnimalObserver | La interfaz encargada de actualizar lo que sucede con el estado del animal |
+
+### Relaciones
+
+| Recurso | Relación | Destino | Multiplicidad | Explicación
+| :---: | :---: | | :---: | | :---: | | :---: |
+| Animal | Herencia | Mammals | Ninguna | Clase hija de la clase padre Animal |
+| Animal | Herencia | Reptiles | Ninguna | Clase hija de la clase padre Animal |
+| Animal | Herencia | Birds | Ninguna | Clase hija de la clase padre Animal |
+| Animal | Uso | AnimalEventManager | Ninguna | Notifica el estado del animal |
+| Animal | Atributo | HealthStatus | Ninguna | Los distintos estados de salud que puede tener el animal |
+| Animal | Composición | MedicalHistory | Ninguna | Posee la historia médica del animal (si no hay historia médica, no se sabría qué enfermedad tiene el animal y como tratarlo) |
+| AnimalEventManager | Atributo | AnimalObserver | Ninguna | Usa la interfaz para usar el contrato (actualizar) sobre el estado del animal |
+| Caretaker | Atributo | Animal | 1 - 1..* | Cuida del animal de modo que ve cuál es su estado: enfermedad, hambruna o suciedad |
+| Caretaker | Uso | AnimalObserver | Ninguna | Usa la interfaz para ser notificado del estado del animal |
+| Visitor | Atributo | Animal | 1..* - 0..* | Tomar la foto del animal |
+| Visitor | Atributo | Caretaker | 0..* - 1..* | Dar propina al cuidador |
+| Visitor | Composición | Photo | Ninguna | Subir la foto a la cámara |
+
 
 ### Principios SOLID usados
 
 | Principio | Aplicación
 | :---: | :---: |
-| **S**ingle Responsability | Explicación... |
-| **O**pen/Closed | Explicación... |
-| **L**iskov Subsitution | Explicación... |
-| **I**nterface Segregation | Explicación... |
-| **D**ependency Inversion | Explicación... |
+| **S**ingle Responsability | Se aplicó en las clases Animal, MedicalHistory, Caretaker y Visitor con el fin de que cada una se encargue de su propio comportamiento al ser objetos diferentes |
+| **O**pen/Closed | Se utilizó en la clase abstracta Animal por si pueden haber más animales (clases hijas) y simplemente sobreescriban los métodos |
+| **L**iskov Subsitution | Usado en los tipos de animales dado que cada animal tiene un sonido diferente por lo que no altera el funcionamiento del sistema  |
+| **I**nterface Segregation | Solamente se usó una interfaz para aplicar el patrón de diseño Observer con el fin de que simplemente actualice el estado del animal |
+| **D**ependency Inversion | Fue usado para que AnimalEventManager usara una lista con aquellos que observaran al animal (caretakers y visitors) a través del uso del contrato update de la interfaz AnimalObserver |
 
 ### Patrones de Diseño usados
 
 | Item | Explicación
 | :---: | :---: |
-| Categoría del Patrón de Diseño | Explicación... |
-| Patrón usado | Explicación... |
-| Justificación | Explicación... |
-| Cómo fue aplicado | Explicación... |
+| Categoría del Patrón de Diseño | De comportamiento |
+| Patrón usado | Observer |
+| Justificación | Se utilizó para que cuidadores y visitantes estuvieran al tanto de cuando un animal cambia de estado como lo es hambriento, sucio o enfermo |
+| Cómo fue aplicado | El manejador del evento AnimalEventManager no depende de Caretaker o Visitor por lo que usa una lista de observadores para notificar el estado por medio del contrato de la interfaz AnimalObserver |
+
+#### Nota
+
+En realidad no sabiamos si implementar este patrón de diseño en el diagrama debido a que interpretamos que los animales tenían distintos estados entonces optamos por usar el patrón de diseño Observer.
+
+### Miembros del Equipo
+
+| Estudiante | Usuario de GitHub | Contribuciones Principales
+| :---: | :---: | :---: |
+| Daniel Felipe Sua Siempira | DANFELcode | Realizó los retos 3, 4 y 5 |
+| Juan Pablo Duarte Silva | JuanP-4bl0 | Realizó los retos 6, 7 y parte del 8 |
+| David Felipe Ortiz Salcedo | DOrtizSalcedo | Realizó los retos 1, 2 y parte del reto 8 |
