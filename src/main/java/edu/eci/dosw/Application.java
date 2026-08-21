@@ -11,12 +11,12 @@ import edu.eci.dosw.challenge7.Challenge7MagicRemoteControl;
 public class Application {
     public static void main(String[] args) {
         System.out.println("Maven project configured and running correctly.");
-        //Challenge1PepeStore.run();
-        //Challenge2FiveStarChef.run();
-        //Challenge3TheKingdomOfVehicles.run();
-        //Challenge4CurrencyExchangeScam.run();
+        Challenge1PepeStore.run();
+        Challenge2FiveStarChef.run();
+        Challenge3TheKingdomOfVehicles.run();
+        Challenge4CurrencyExchangeScam.run();
         Challenge5CustomizedCoffee.run();
-        //Challenge6TechnicalSupport.run();
-        //Challenge7MagicRemoteControl.run();
+        Challenge6TechnicalSupport.run();
+        Challenge7MagicRemoteControl.run();
     }
 }
