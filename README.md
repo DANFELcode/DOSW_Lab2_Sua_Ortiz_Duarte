@@ -103,11 +103,11 @@ Saltados: 0
 
 ### Descripción
 
-Para este reto se uso el patrón de diseño Factory Method, ya que el enunciado pedia que el sistema pudiera generar distintos tipos de vehiculos (terrestres, acuaticos y aereos) sin que el codigo que atiende la compra tuviera que conocer los detalles de construccion de cada uno. Se crearon las clases Vehicle (clase abstracta con los atributos y comportamiento comunes) y las 9 clases concretas de modelo: Car, Bicycle, Motorcycle, Boat, SailBoat, JetSki, Airplane, LightAircraft y Helicopter, cada una con su propio precio y velocidad base fijos.
+Para este reto se usó el patrón de diseño `Factory Method`, ya que el enunciado pedía que el sistema pudiera generar distintos tipos de vehiculos (terrestres, acuaticos y aereos) sin que el código que atiende la compra tuviera que conocer los detalles de construcción de cada uno. Se crearon las clases `Vehicle` (clase abstracta con los atributos y comportamiento comunes) y las 9 clases concretas de modelo: `Car`, `Bicycle`, `Motorcycle`, `Boat`, `SailBoat`, `JetSki`, `Airplane`, `LightAircraft` y `Helicopter`, cada una con su propio precio y velocidad base fijos.
 
-La interfaz VehicleFactory define el contrato createVehicle(model, category), y cada familia tiene su propia implementacion (LandVehicleFactory, WaterVehicleFactory, AirVehicleFactory) que decide, según el modelo pedido, cual clase concreta instanciar. La categoria (Economy, Luxury, Used) se represento como una clase aparte, Category, que trae multiplicadores de precio y velocidad, asi el mismo modelo puede tener caracteristicas distintas según la categoria elegida, sin necesitar una subclase por cada combinación.
+La interfaz `VehicleFactory` define el contrato createVehicle(model, category), y cada familia tiene su propia implementación (`LandVehicleFactory`, `WaterVehicleFactory`, `AirVehicleFactory`) que decide, según el modelo pedido, cual clase concreta instanciar. La categoría (Economy, Luxury, Used) se representó como una clase aparte, `Category`, que trae multiplicadores de precio y velocidad, así el mismo modelo puede tener características distintas según la categoría elegida, sin necesitar una subclase por cada combinación.
 
-Ya por último, Challenge3TheKingdomOfVehicles usa streams con mapToDouble() y sum() para calcular el precio total de la compra, y aplica un descuento del 20% cuando se compran dos o más vehículos.
+Ya por último, `Challenge3TheKingdomOfVehicles` usa streams con `mapToDouble()` y `sum()` para calcular el precio total de la compra, y aplica un descuento del 20% cuando se compran dos o más vehículos.
 
 ### Patrones de Diseño usados
 
@@ -115,10 +115,8 @@ Ya por último, Challenge3TheKingdomOfVehicles usa streams con mapToDouble() y s
 | :---: | :---: |
 | Categoría del Patrón de Diseño | Creacional |
 | Patrón usado | Factory Method |
-| Justificación | El enunciado pedia generar vehiculos de distintas familias y modelos sin que el sistema supiera de antemano los detalles de construccion de cada tipo especifico |
+| Justificación | El enunciado pedía generar vehiculos de distintas familias y modelos sin que el sistema supiera de antemano los detalles de construcción de cada tipo específico |
 | Cómo fue aplicado | Se creó la interfaz VehicleFactory como contrato, y cada familia (LandVehicleFactory, WaterVehicleFactory, AirVehicleFactory) implementa la creación de sus propios modelos según el texto que ingresa el usuario, delegando en la clase abstracta Vehicle los atributos y comportamiento comunes |
-
-
 
 ## Reto 4 - The Currency Exchange Sam
 
@@ -127,11 +125,11 @@ Ya por último, Challenge3TheKingdomOfVehicles usa streams con mapToDouble() y s
 
 ### Descripción
 
-Para este reto se uso el patrón de diseño Strategy, ya que el enunciado exigia corregir el error del antiguo dueño de usar la misma tasa para todas las conversiones, y el sistema debia permitir obtener la tasa correcta entre cualquier par de monedas sin que el servicio de conversión supiera de dónde salen esas tasas. Se creó la interfaz ExchangeRate con el método getRate(origin, destination), y la clase FixedExchangeRate la implementa guardando las tasas de cada moneda respecto a una moneda base (USD), en vez de guardar un valor por cada par posible, asi se evita que el número de tasas crezca exponencialmente si se agregan más monedas.
+Para este reto se uso el patrón de diseño `Strategy`, ya que el enunciado exigia corregir el error del antiguo dueño de usar la misma tasa para todas las conversiones, y el sistema debia permitir obtener la tasa correcta entre cualquier par de monedas sin que el servicio de conversión supiera de dónde salen esas tasas. Se creó la interfaz `ExchangeRate` con el método getRate(origin, destination), y la clase `FixedExchangeRate` la implementa guardando las tasas de cada moneda respecto a una moneda base (USD), en vez de guardar un valor por cada par posible, asi se evita que el número de tasas crezca exponencialmente si se agregan más monedas.
 
-La clase RateSwitcher recibe un ExchangeRate por constructor (inyección de dependencia) y lo usa para calcular la conversión, sin conocer si las tasas vienen de un mapa fijo, un archivo o una API. Cada conversión se representa con la clase inmutable Transaction.
+La clase `RateSwitcher` recibe un ExchangeRate por constructor (inyección de dependencia) y lo usa para calcular la conversión, sin conocer si las tasas vienen de un mapa fijo, un archivo o una API. Cada conversión se representa con la clase inmutable Transaction.
 
-Ya por último, Challenge4CurrencyExchangeScam acumula las transacciones en una lista y usa streams con groupingBy() y summingDouble() para calcular los totales convertidos agrupados por moneda destino.
+Ya por último, `Challenge4CurrencyExchangeScam` acumula las transacciones en una lista y usa streams con `groupingBy()` y `summingDouble()` para calcular los totales convertidos agrupados por moneda destino.
 
 ### Patrones de Diseño usados
 
@@ -150,11 +148,11 @@ Ya por último, Challenge4CurrencyExchangeScam acumula las transacciones en una 
 
 ### Descripción
 
-Para este reto se uso el patrón de diseño Decorator, ya que el enunciado pedia que se pudieran agregar toppings a un café sin modificar la clase base del café, y que fuera posible incorporar nuevos toppings en el futuro sin tocar lo ya construido. Se creó la interfaz Coffee con los métodos getDescription() y getPrice(), la clase SimpleCoffee como el componente base, y la clase abstracta ToppingDecorator que implementa Coffee y envuelve otro objeto Coffee.
+Para este reto se uso el patrón de diseño `Decorator`, ya que el enunciado pedia que se pudieran agregar toppings a un café sin modificar la clase base del café, y que fuera posible incorporar nuevos toppings en el futuro sin tocar lo ya construido. Se creó la interfaz Coffee con los métodos getDescription() y getPrice(), la clase SimpleCoffee como el componente base, y la clase abstracta ToppingDecorator que implementa Coffee y envuelve otro objeto Coffee.
 
-Cada topping (MilkTopping, ChocolateTopping, CaramelTopping, WhippedCreamTopping, MintTopping) extiende ToppingDecorator y delega en el café que envuelve para obtener la descripción y el precio previos, sumándole lo propio. También se creó CustomTopping para permitir toppings con nombre y precio definidos por el usuario, sin tener que crear una clase nueva por cada uno.
+Cada topping (`MilkTopping`, `ChocolateTopping`, `CaramelTopping`, `WhippedCreamTopping`, `MintTopping`) extiende `ToppingDecorator` y delega en el café que envuelve para obtener la descripción y el precio previos, sumándole lo propio. También se creó `CustomTopping` para permitir toppings con nombre y precio definidos por el usuario, sin tener que crear una clase nueva por cada uno.
 
-Ya por último, Challenge5CustomizedCoffee permite armar varios cafés en una misma ejecución y usa streams con mapToDouble() y sum() para calcular el precio total de todos los cafés creados.
+Ya por último, `Challenge5CustomizedCoffee` permite armar varios cafés en una misma ejecución y usa streams con `mapToDouble()` y `sum()` para calcular el precio total de todos los cafés creados.
 
 ### Patrones de Diseño usados
 
@@ -165,8 +163,6 @@ Ya por último, Challenge5CustomizedCoffee permite armar varios cafés en una mi
 | Justificación | El enunciado pedia agregar toppings a un café en tiempo de ejecución sin modificar la clase base, permitiendo además incorporar nuevos toppings sin tocar el código existente |
 | Cómo fue aplicado | Se creó la interfaz Coffee como contrato, la clase SimpleCoffee como componente base, y la clase abstracta ToppingDecorator que envuelve un Coffee y delega en él, permitiendo apilar toppings uno sobre otro (coffee = new MilkTopping(coffee)) sin que ninguna clase conozca a las demás |
 
-
-
 ## Reto 6 - Talk to Technical Support
 
 ### Evidencia
@@ -174,11 +170,11 @@ Ya por último, Challenge5CustomizedCoffee permite armar varios cafés en una mi
 
 ### Descripción
 
-Para este reto se uso el patrón de diseño Chain of Responsibility, ya que el enunciado pedia literalmente que un ticket pasara de tecnico en tecnico hasta encontrar uno capaz de resolverlo. Se crearon las clases Ticket y TicketResolution (el resultado del procesamiento, con el tecnico que lo resolvio y la lista de técnicos que lo intentaron).
+Para este reto se uso el patrón de diseño `Chain of Responsibility`, ya que el enunciado pedia literalmente que un ticket pasara de técnico en técnico hasta encontrar uno capaz de resolverlo. Se crearon las clases `Ticket` y `TicketResolution` (el resultado del procesamiento, con el tecnico que lo resolvió y la lista de técnicos que lo intentaron).
 
-La interfaz SupportHandler define el contrato de la cadena handle(Ticket), y la clase Technician la implementa: cada técnico tiene una especialidad (que debe coincidir exactamente con el nivel del ticket) y una prioridad maxima que puede atender (que funciona como un umbral, es decir, atiende su nivel y los inferiores). Si un técnico no puede resolver el ticket, lo delega al siguiente next usando la misma interfaz, sin conocer los detalles de los demas tecnicos.
+La interfaz `SupportHandler` define el contrato de la cadena handle(`Ticket`), y la clase `Technician` la implementa: cada técnico tiene una especialidad (que debe coincidir exactamente con el nivel del ticket) y una prioridad máxima que puede atender (que funciona como un umbral, es decir, atiende su nivel y los inferiores). Si un técnico no puede resolver el ticket, lo delega al siguiente next usando la misma interfaz, sin conocer los detalles de los demás técnicos.
 
-Ya por último, SupportChain arma la cadena y procesa la lista de tickets, y SupportStatistics usa streams para calcular cuantos tickets resolvio cada tecnico, cuantos quedaron pendientes y la prioridad media de los tickets resueltos.
+Ya por último, `SupportChain` arma la cadena y procesa la lista de tickets, y `SupportStatistics` usa streams para calcular cuántos tickets resolvió cada técnico, cuántos quedaron pendientes y la prioridad media de los tickets resueltos.
 
 ### Patrones de Diseño usados
 
@@ -196,9 +192,9 @@ Ya por último, SupportChain arma la cadena y procesa la lista de tickets, y Sup
 
 ### Descripción
 
-Para este reto se uso el patron de diseño Command, ya que el enunciado pedia que cada accion sobre un dispositivo pudiera tener parametros y pudiera deshacerse despues de ejecutada, lo cual es la definicion del patron. Se creo la interfaz Command y varios comandos como: TurnOnCommand y TurnOffCommand (estas se reutilizaron para luces, TV y aire acondicionado con la interfaz Switchable), OpenDoorCommand, CloseDoorCommand y unos comandos con parametros como SetVolumeCommand y SetBlindPositionCommand. Cada comando guarda su estado anterior antes de ejecutarse para revertirlo exactamente al deshacerlo.
+Para este reto se usó el patrón de diseño `Command`, ya que el enunciado pedía que cada acción sobre un dispositivo pudiera tener parámetros y pudiera deshacerse despues de ejecutada, lo cual es la definición del patrón. Se creó la interfaz `Command` y varios comandos como: `TurnOnCommand` y `TurnOffCommand` (estas se reutilizaron para luces, TV y aire acondicionado con la interfaz `Switchable`), `OpenDoorCommand`, `CloseDoorCommand` y unos comandos con parámetros como `SetVolumeCommand` y `SetBlindPositionCommand`. Cada comando guarda su estado anterior antes de ejecutarse para revertirlo exactamente al deshacerlo.
 
-La clase RemoteControl es el que ejecuta cada comando y lo registra en un historial ExecutedAction junto al usuario que lo hizo. En la parte final, RemoteControlAudit usa streams para responder las preguntas de auditoria del enunciado: que acciones se deshicieron y que usuario fue el último en modificar cada dispositivo
+La clase `RemoteControl` es el que ejecuta cada comando y lo registra en un historial `ExecutedAction` junto al usuario que lo hizo. En la parte final, `RemoteControlAudit` usa streams para responder las preguntas de auditoria del enunciado: que acciones se deshicieron y que usuario fue el último en modificar cada dispositivo
 
 ### Patrones de Diseño usados
 
@@ -232,7 +228,7 @@ La clase RemoteControl es el que ejecuta cada comando y lo registra en un histor
 ### Relaciones
 
 | Recurso | Relación | Destino | Multiplicidad | Explicación
-| :---: | :---: | | :---: | | :---: | | :---: |
+| :---: | :---: | :---: | :---: | :---: |
 | Animal | Herencia | Mammals | Ninguna | Clase hija de la clase padre Animal |
 | Animal | Herencia | Reptiles | Ninguna | Clase hija de la clase padre Animal |
 | Animal | Herencia | Birds | Ninguna | Clase hija de la clase padre Animal |
